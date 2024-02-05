@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+    environment:
+      - XWIKI_VERSION=16.0.0
+      - DB_USER=xwiki@xwiki
+      - DB_PASSWORD=Venduetech@123
+      - DB_DATABASE=Xwiki
+      - DB_HOST=xwiki.database.windows.net
+    ports:
+      - "8080:80"
+
+  db:
+    image: "mysql:8.3"
+    environment:
+      - XWIKI_VERSION=16.0.0
+      - DB_USER=xwiki@xwiki
+      - DB_PASSWORD=Venduetech@123
+      - DB_DATABASE=Xwiki
+      - DB_HOST=xwiki.database.windows.net
