@@ -1,23 +1,23 @@
-version: '3.8'
-
+version: '2'
 services:
   web:
-    build:
-      context: .
-    environment:
-      - XWIKI_VERSION=16.0.0
-      - DB_USER=xwiki@xwiki
-      - DB_PASSWORD=Venduetech@123
-      - DB_DATABASE=Xwiki
-      - DB_HOST=xwiki.database.windows.net
+    build: .
     ports:
-      - "8080:80"
-
+      - "8080:8080"
+    environment:
+      - XWIKI_VERSION=${XWIKI_VERSION}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_HOST=<azure_mysql_host>
+    volumes:
+      - xwiki-data:/usr/local/xwiki
   db:
     image: "mysql:8.3"
     environment:
-      - XWIKI_VERSION=16.0.0
-      - DB_USER=xwiki@xwiki
-      - DB_PASSWORD=Venduetech@123
-      - DB_DATABASE=Xwiki
-      - DB_HOST=xwiki.database.windows.net
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+volumes:
+  xwiki-data: {}
